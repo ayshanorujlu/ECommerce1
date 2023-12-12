@@ -45,10 +45,23 @@
                     <td>
                     @item.UnitsInStock
                     </td>
-                    <td>
-                        <a class="btn btn-xs btn-success">Add To Cart</a>
-                    </td>
+                <td>
+                    <a class="btn btn-xs btn-success"
+                   href="/Cart/AddToCart?productId=@item.ProductId&page=@Model.CurrentPage&category=@Model.CurrentCategory">Add To Cart</a>
+
+                    
+                </td>
                 </tr>
         }
     </tbody>
 </table>
+
+@section scripts {
+    <script src="/js/CustomJs.js"></script>
+}
+
+<product-list-pager current-category="@Model.CurrentCategory"
+                    current-page="@Model.CurrentPage"
+                    page-count="@Model.PageCount"
+                    page-size="@Model.PageSize">
+</product-list-pager>

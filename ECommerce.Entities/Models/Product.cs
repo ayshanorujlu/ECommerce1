@@ -11,6 +11,7 @@ namespace ECommerce.Entities.Models
             OrderDetails = new HashSet<OrderDetail>();
         }
 
+
         public int ProductId { get; set; }
         public string ProductName { get; set; } = null!;
         public int? SupplierId { get; set; }
