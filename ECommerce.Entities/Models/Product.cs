@@ -1,10 +1,8 @@
 ﻿using ECommerce.Core.Abstractions;
-using System;
-using System.Collections.Generic;
 
 namespace ECommerce.Entities.Models
 {
-    public partial class Product:IEntity
+    public partial class Product : IEntity
     {
         public Product()
         {
@@ -13,6 +11,7 @@ namespace ECommerce.Entities.Models
 
 
         public int ProductId { get; set; }
+        public bool HasAdded { get; set; }
         public string ProductName { get; set; } = null!;
         public int? SupplierId { get; set; }
         public int? CategoryId { get; set; }
@@ -26,5 +25,6 @@ namespace ECommerce.Entities.Models
         public virtual Category? Category { get; set; }
         public virtual Supplier? Supplier { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+
     }
 }

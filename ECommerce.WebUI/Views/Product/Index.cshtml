@@ -1,57 +1,78 @@
 ﻿@model ProductListViewModel
 
+<div class="row">
+    <div class="col-6">
+        <input type="text" placeholder="Search here..." id="form1" class="form-control m-1 float-end" style="width:50%;" />
+    </div>
+</div>
 
-<a class="btn btn-outline-success" href="/product/SortByLetter?hasSortClicked=@Model.hasSortingClicked&page=@Model.CurrentPage&category=@Model.CurrentCategory">
-    @if (Model.hasSortingClicked)
+<a class="btn btn-xs btn btn-outline-dark" href="/product/SortWithLetter?hasSortClicked=@Model.hasSortClicked&page=@Model.CurrentPage&category=@Model.CurrentCategory">
+    @if (Model.hasSortClicked)
     {
-        <div>A - Z</div>
+        <div>
+            A-Z
+        </div>
     }
     else
     {
-        <div>Z - A</div>
+        <div>
+            Z-A
+
+        </div>
     }
 </a>
-<a class="btn btn-outline-success" href="/product/SortByPrice?hasPriceSortClicked=@Model.hasSortingPriceClicked&page=@Model.CurrentPage&category=@Model.CurrentCategory">
+<a class="btn btn-xs btn btn-outline-dark" href="/product/SortForPrice?hasPriceSortClicked=@Model.hasPriceSortClicked&page=@Model.CurrentPage&category=@Model.CurrentCategory">
 
-    @if (Model.hasSortingPriceClicked)
+    @if (Model.hasPriceSortClicked)
     {
-        <div>Lower to Higher</div>
+        <div>
+            Lower To Higher
+        </div>
     }
     else
     {
-        <div>Higher to Lower</div>
+        <div>
+            Higher To Lower
+        </div>
     }
 </a>
 
 <table class="table">
     <thead>
         <tr>
-            <th>ProductName</th>
+            <th> ProductName</th>
             <th>UnitPrice</th>
             <th>UnitsInStock</th>
             <th></th>
         </tr>
     </thead>
-     <tbody>
+    <tbody id="mytable">
         @foreach (var item in Model.Products)
         {
-                <tr>
-                    <td>
+            <tr>
+                <td id="name">
                     @item.ProductName
-                    </td>
-                    <td>
+                </td>
+                <td>
                     @item.UnitPrice
-                    </td>
-                    <td>
+                </td>
+                <td>
                     @item.UnitsInStock
-                    </td>
+                </td>
                 <td>
                     <a class="btn btn-xs btn-success"
-                   href="/Cart/AddToCart?productId=@item.ProductId&page=@Model.CurrentPage&category=@Model.CurrentCategory">Add To Cart</a>
+                       href="/Cart/AddToCart?productId=@item.ProductId&page=@Model.CurrentPage&category=@Model.CurrentCategory">Add To Cart</a>
 
-                    
+                    @if (item.HasAdded)
+                    {
+                        <a id="remove" class="btn btn-xs btn-danger" href="/Cart/RemoveDirectly?productId=@item.ProductId">Remove from Cart</a>
+                    }
+                    else if (!item.HasAdded)
+                    {
+                        <a></a>
+                    }
                 </td>
-                </tr>
+            </tr>
         }
     </tbody>
 </table>

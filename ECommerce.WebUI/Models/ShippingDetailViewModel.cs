@@ -1,8 +1,8 @@
 ﻿using ECommerce.Entities.Concrete;
 
-namespace ECommerce.WebUI
+namespace ECommerce.WebUI.Models
 {
-    internal class ShippingDetailViewModel
+    public class ShippingDetailViewModel
     {
         public ShippingDetails ShippingDetails { get; set; }
     }

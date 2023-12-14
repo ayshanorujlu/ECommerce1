@@ -34,6 +34,22 @@ namespace ECommerce.WebUI.Controllers
             return View(model);
         }
 
+        public async Task<List<Product>> Search(string word)
+        {
+            var allProducts = await _productService.GetAll();
+            if (allProducts != null && !string.IsNullOrEmpty(word))
+            {
+                var result = allProducts.Where(r => r.ProductName.ToLower().Contains(word.ToLower())).ToList();
+                var model = new ProductListViewModel
+                {
+                    Products = result
+                };
+                return result;
+            }
+            return null;
+        }
+
+
         // GET: ProductController/Details/5
         public ActionResult Details(int id)
         {
@@ -116,7 +132,7 @@ namespace ECommerce.WebUI.Controllers
                 model.PageCount = ((int)Math.Ceiling(products.Count / (double)pageSize));
                 model.PageSize = pageSize;
                 model.CurrentPage = page;
-                model.hasSortingClicked = true;
+                model.hasSortClicked = true;
                 return View("Index", model);
             }
             else
@@ -127,7 +143,7 @@ namespace ECommerce.WebUI.Controllers
                 model.PageCount = ((int)Math.Ceiling(products.Count / (double)pageSize));
                 model.PageSize = pageSize;
                 model.CurrentPage = page;
-                model.hasSortingClicked = false;
+                model.hasSortClicked = false;
                 return View("Index", model);
             }
         }
@@ -145,7 +161,7 @@ namespace ECommerce.WebUI.Controllers
                 model.PageCount = ((int)Math.Ceiling(products.Count / (double)pageSize));
                 model.PageSize = pageSize;
                 model.CurrentPage = page;
-                model.hasSortingPrice = true;
+                model.hasSortClicked = true;
                 return View("Index", model);
             }
             else
@@ -155,7 +171,7 @@ namespace ECommerce.WebUI.Controllers
                 model.PageCount = ((int)Math.Ceiling(products.Count / (double)pageSize));
                 model.PageSize = pageSize;
                 model.CurrentPage = page;
-                model.hasDescSortingPrice = true;
+                model.hasDescSortClicked = true;
                 return View("Index", model);
             }
         }
