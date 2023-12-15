@@ -52,7 +52,7 @@ namespace ECommerce.Entities.Models
                 optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=Northwind;Trusted_Connection=True;\n");
             }
         }
-
+        //aa
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AlphabeticalListOfProduct>(entity =>
